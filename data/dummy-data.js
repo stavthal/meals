@@ -43,7 +43,7 @@ export const MEALS = [
     false,
     true,
     true,
-    true
+    true,
   ),
 
   new Meal(
@@ -69,7 +69,7 @@ export const MEALS = [
     false,
     false,
     false,
-    false
+    false,
   ),
 
   new Meal(
@@ -98,7 +98,7 @@ export const MEALS = [
     false,
     false,
     false,
-    true
+    true,
   ),
 
   new Meal(
@@ -131,7 +131,7 @@ export const MEALS = [
     false,
     false,
     false,
-    false
+    false,
   ),
 
   new Meal(
@@ -163,7 +163,7 @@ export const MEALS = [
     true,
     false,
     true,
-    true
+    true,
   ),
 
   new Meal(
@@ -196,7 +196,7 @@ export const MEALS = [
     true,
     false,
     true,
-    false
+    false,
   ),
 
   new Meal(
@@ -225,7 +225,7 @@ export const MEALS = [
     true,
     false,
     true,
-    false
+    false,
   ),
 
   new Meal(
@@ -256,7 +256,7 @@ export const MEALS = [
     true,
     false,
     false,
-    true
+    true,
   ),
 
   new Meal(
@@ -303,7 +303,7 @@ export const MEALS = [
     true,
     false,
     true,
-    false
+    false,
   ),
   new Meal(
     "m10",
@@ -332,6 +332,6 @@ export const MEALS = [
     true,
     true,
     true,
-    true
+    true,
   ),
 ];

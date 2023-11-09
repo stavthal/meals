@@ -11,6 +11,7 @@ import {
 
 import { MEALS } from "../data/dummy-data";
 import List from "../components/MealDetails/List";
+import IconButton from "../components/IconButton";
 
 const MealDetailsScreen = ({ navigation, route }) => {
   const { mealId } = route.params;
@@ -23,9 +24,21 @@ const MealDetailsScreen = ({ navigation, route }) => {
     return newString;
   };
 
+  const handleIconPress = () => {
+    alert("Pressed");
+  };
+
   useLayoutEffect(() => {
     navigation.setOptions({
       headerTitle: selectedMeal.title,
+      headerRight: () => (
+        <IconButton
+          icon="star-outline"
+          size={24}
+          color="white"
+          onPress={handleIconPress}
+        />
+      ),
     });
   }, []);
 
