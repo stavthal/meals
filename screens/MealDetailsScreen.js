@@ -1,4 +1,4 @@
-import { useLayoutEffect } from "react";
+import { useContext, useLayoutEffect } from "react";
 import {
   Text,
   View,
@@ -12,11 +12,17 @@ import {
 import { MEALS } from "../data/dummy-data";
 import List from "../components/MealDetails/List";
 import IconButton from "../components/IconButton";
+import { FavoritesContext } from "../screens/store/context/favorites-context";
+
+//test
+import { useFavoritesContext } from "./store/hooks/useFavoritesContext";
 
 const MealDetailsScreen = ({ navigation, route }) => {
   const { mealId } = route.params;
+  const { ids, addFavorite, removeFavorite } = useFavoritesContext();
 
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
+  const mealIsFavorite = ids.includes(mealId);
 
   const capitalizeF = (string) => {
     const firstLetter = string[0].toUpperCase(); // capitalizes the first letter
@@ -25,7 +31,11 @@ const MealDetailsScreen = ({ navigation, route }) => {
   };
 
   const handleIconPress = () => {
-    alert("Pressed");
+    if (mealIsFavorite) {
+      removeFavorite(mealId);
+    } else {
+      addFavorite(mealId);
+    }
   };
 
   useLayoutEffect(() => {
@@ -33,14 +43,14 @@ const MealDetailsScreen = ({ navigation, route }) => {
       headerTitle: selectedMeal.title,
       headerRight: () => (
         <IconButton
-          icon="star-outline"
+          icon={mealIsFavorite ? "star" : "star-outline"}
           size={24}
           color="white"
           onPress={handleIconPress}
         />
       ),
     });
-  }, []);
+  }, [navigation, handleIconPress]);
 
   return (
     <View style={{ flex: 1 }}>
