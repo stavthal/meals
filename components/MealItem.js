@@ -43,8 +43,8 @@ const MealItem = ({
         </View>
         <View style={styles.detailsView}>
           <Text style={styles.detailItem}>{duration} minutes</Text>
-          <Text style={styles.detailItem}>{complexity.toUpperCase()}</Text>
-          <Text style={styles.detailItem}>{affordability.toUpperCase()}</Text>
+          <Text style={styles.detailItem}>{complexity?.toUpperCase()}</Text>
+          <Text style={styles.detailItem}>{affordability?.toUpperCase()}</Text>
         </View>
       </Pressable>
     </View>

@@ -1,42 +1,65 @@
 import { View, Text, StyleSheet, ScrollView } from "react-native";
-import { useFavoritesContext } from "./store/hooks/useFavoritesContext";
+// import { useFavoritesContext } from "./store/hooks/useFavoritesContext";
+import { useSelector } from "react-redux";
 
 import { MEALS } from "../data/dummy-data";
 import MealsList from "../components/MealsList/MealsList";
 
 const FavoritesScreen = () => {
-  const { ids } = useFavoritesContext();
+  // const { ids } = useFavoritesContext();
 
-  const favoriteMeals = MEALS.filter((meal) => ids.includes(meal.id));
+  // using the useSelector to retrieve the ids from the global state
+  const favoriteMealsIds = useSelector((state) => state.favoriteMeals.ids);
+
+  const favoriteMeals = MEALS.filter((meal) =>
+    favoriteMealsIds.includes(meal.id),
+  );
+
   return (
-    <View style={styles.container}>
+    <View style={styles.rootContainer}>
       {favoriteMeals.length > 0 ? (
-        <View>
+        <View style={styles.itemsContainer}>
           <Text style={styles.title}>
             This is the list of your favorite meals!
           </Text>
           <MealsList data={favoriteMeals} />
         </View>
       ) : (
-        <Text
-          style={[
-            styles.title,
-            { marginTop: 50, marginHorizontal: 30, fontStyle: "italic" },
-          ]}
-        >
-          You do not have any favorite meals at the moment...
-        </Text>
+        <View style={styles.container}>
+          <Text
+            style={[
+              styles.title,
+              {
+                marginHorizontal: 30,
+                fontStyle: "italic",
+                alignSelf: "center",
+              },
+            ]}
+          >
+            You do not have any favorite meals at the moment...
+          </Text>
+        </View>
       )}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  rootContainer: {
+    flex: 1,
+    paddingVertical: "5%",
+    marginBottom: 10,
+    justifyContent: "flex-start",
+  },
+
+  itemsContainer: {
+    flex: 1,
+    justifyContent: "flex-start",
+  },
+
   container: {
     flex: 1,
     justifyContent: "center",
-    paddingVertical: "5%",
-    marginBottom: 10,
   },
 
   title: {

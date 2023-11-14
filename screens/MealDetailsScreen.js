@@ -8,21 +8,29 @@ import {
   ScrollView,
   Platform,
 } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
 
 import { MEALS } from "../data/dummy-data";
 import List from "../components/MealDetails/List";
 import IconButton from "../components/IconButton";
-import { FavoritesContext } from "../screens/store/context/favorites-context";
+import { addFavorite, removeFavorite } from "./store/redux/favorites"; // importing the actions
+
+// import { FavoritesContext } from "../screens/store/context/favorites-context";
 
 //test
-import { useFavoritesContext } from "./store/hooks/useFavoritesContext";
+// import { useFavoritesContext } from "./store/hooks/useFavoritesContext";
 
 const MealDetailsScreen = ({ navigation, route }) => {
   const { mealId } = route.params;
-  const { ids, addFavorite, removeFavorite } = useFavoritesContext();
+  // const { ids, addFavorite, removeFavorite } = useFavoritesContext();
 
+  //implementation of favorite meal ids state from reducer
+  const favoriteMealIds = useSelector((state) => state.favoriteMeals.ids); // favoriteMeals is the name of the reducer in store.js file
+  const dispatch = useDispatch(); // getting the ability to dispatch actions through this screen and its components
+
+  // getting the correct meal to display
   const selectedMeal = MEALS.find((meal) => meal.id === mealId);
-  const mealIsFavorite = ids.includes(mealId);
+  const mealIsFavorite = favoriteMealIds.includes(mealId);
 
   const capitalizeF = (string) => {
     const firstLetter = string[0].toUpperCase(); // capitalizes the first letter
@@ -32,9 +40,11 @@ const MealDetailsScreen = ({ navigation, route }) => {
 
   const handleIconPress = () => {
     if (mealIsFavorite) {
-      removeFavorite(mealId);
+      // removeFavorite(mealId);
+      dispatch(removeFavorite({ id: mealId }));
     } else {
-      addFavorite(mealId);
+      // addFavorite(mealId);
+      dispatch(addFavorite({ id: mealId }));
     }
   };
 
